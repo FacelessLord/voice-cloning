@@ -2,3 +2,6 @@
 .venv
 *.env
 .idea
+vits/
+sonya_dataset/
+sonya_source/
