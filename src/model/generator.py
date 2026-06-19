@@ -68,8 +68,9 @@ class SimplifiedVITSGenerator(nn.Module):
 
         # kl_loss = -0.5 * torch.sum(1 + logs_p - m_p.pow(2) - logs_p.exp()) / (batch_size * text_len)
 
-        log_durs = torch.log(durs.float() + 1e-8)
-        dur_loss = F.mse_loss(log_dur_predict, log_durs)
+        log_durs = torch.log(durs.float() + 1e-8).clamp(min=1)
+        weights = durs.float().clamp(min=1) / durs.float().mean()
+        dur_loss = torch.mean(weights * (log_dur_predict - log_durs) ** 2)
 
         return {
             "audio_generated": audio_generated,

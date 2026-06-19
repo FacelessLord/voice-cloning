@@ -103,7 +103,7 @@ def vits_collate_fn(batch):
 def create_data_loader(dataset):
     return DataLoader(
         dataset,
-        batch_size=10,
+        batch_size=5,
         shuffle=True,
         collate_fn=vits_collate_fn,
         num_workers=0,

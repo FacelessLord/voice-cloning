@@ -1,10 +1,12 @@
+from debugger import Debugger
 from src.model import SimpleVITS
 
 
 class TrainingConfig:
-    def __init__(self, tokenizer, vocab_size, model: SimpleVITS, optimizer_g, optimizer_d, scheduler_g, scheduler_d, mel_extractor, device, min_audio_length,
-                 mel_hop_length, num_epochs, save_every):
+    def __init__(self, tokenizer, debugger: Debugger, vocab_size, model: SimpleVITS, optimizer_g, optimizer_d, mel_extractor, device, min_audio_length,
+                 mel_hop_length, num_epochs, save_every, scheduler_g = None, scheduler_d=None):
         self.model = model
+        self.debugger = debugger
         self.save_every = save_every
         self.num_epochs = num_epochs
         self.mel_hop_length = mel_hop_length
